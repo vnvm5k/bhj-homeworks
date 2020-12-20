@@ -17,13 +17,34 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+
+    document.addEventListener('keyup', (e) => {
+      let symbols = Array.from(document.querySelectorAll('.symbol'));
+     
+      let activeSymbol = symbols.findIndex(item => item.classList.contains('symbol_current'));
+      let content = symbols[activeSymbol].textContent; 
+  
+
+      let insert = e.key;
+
+      if (insert.toLowerCase() == content) {
+        this.success();
+      }
+      else {
+        this.fail(); 
+      }
+
+      if (activeSymbol + 1 == symbols.length) {
+        symbols[0].classList.toggle('symbol_current');
+
+      }else {
+        symbols[activeSymbol].classList.toggle('symbol_current');
+        symbols[activeSymbol + 1].classList.toggle('symbol_current'); 
+      }
+
+    })
+
+  
   }
 
   success() {
