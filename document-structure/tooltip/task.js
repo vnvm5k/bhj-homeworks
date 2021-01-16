@@ -1,13 +1,15 @@
 document.addEventListener('click', function(event) {
 	let a = event.target;
+	a.style.position = "relative";
 	if(!a.classList.contains('has-tooltip')) return; 
-	a.style = "position: relative";
 	let div = document.createElement('div');
-	div.className = "tooltip";
-	div.style = "left: 0; top: 0"; 
+	div.className = "tooltip"; 
 	div.innerText = a.title;
-	a.insertAdjacentElement('beforeend', div)	
+	div.style.width = "fit-content"; 
+	a.insertAdjacentElement('afterend', div)	
 
 	div.classList.toggle('tooltip_active');
+	let position = a.getBoundingClientRect();
+	div.style.left = position.left + "px";
 	event.preventDefault();
 })

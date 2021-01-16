@@ -9,7 +9,8 @@ if(localStorage.getItem('todo')){
 	displayMessages();
 }
 
-addButton.addEventListener('click', function(){
+addButton.addEventListener('click', function(event){
+
    if(!addMessage.value) return; 
   let newTodo = {
   	todo: addMessage.value, 
@@ -19,6 +20,7 @@ addButton.addEventListener('click', function(){
   displayMessages();
   localStorage.setItem('todo', JSON.stringify(todoList)); 
   addMessage.value = ''; 
+  event.preventDefault();
 });
 
 function displayMessages(){

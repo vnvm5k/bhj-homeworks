@@ -2,10 +2,10 @@ const widget = document.querySelector(".chat-widget");
 const messages = document.querySelector('.chat-widget__messages');
 const input = document.querySelector('.chat-widget__input');
 const robotPhrases = [
-'123',
-'456',
-'789',
-'101112'
+'Никого нет дома',
+'Скатерью дорога',
+'Что-нибудь еще?',
+'Какая жалость'
 ];
 
 
@@ -17,36 +17,30 @@ widget.addEventListener('click', function() {
 
 
 input.addEventListener('keydown', function(e) {
+    let random = function (min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+	let botMessage = robotPhrases[random(0, robotPhrases.length)];;
+	let clientMessage = input.value; 
+	let time = new Date().toLocaleTimeString(); 
+
+		
     if (e.keyCode === 13) {
     	messages.innerHTML += `
 			<div class="message">
-			  <div class="message__time"></div>
+			  <div class="message__time">${time}</div>
 			  <div class="message__text">
-			    
+			    ${botMessage}
 			  </div>
 			</div>
 
 			<div class="message message_client">
-			  <div class="message__time"></div>
+			  <div class="message__time">${time}</div>
 			  <div class="message__text">
-			
+			  	${clientMessage}
 			  </div>
 			</div>
 			`;
-		let time = Array.from(document.querySelectorAll('.message__time'));
-		let botMessage = document.querySelectorAll('.message > .message__text');
-		let clientMessage = document.querySelectorAll('.message_client > .message__text'); 
-		
 
-		time.forEach(function (el) {
-			el.textContent = new Date().toLocaleTimeString(); 
-		})
-
-		let random = function (min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
-		
-		botMessage.textContent = robotPhrases[random(0, robotPhrases.length)];
-		clientMessage.textContent = input.value; 
     }
   });

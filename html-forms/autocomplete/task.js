@@ -69,23 +69,22 @@ class Autocomplete {
 
   getMatches( text ) {
 
-    let options = this.input.options; 
+    let options = Array.from(this.input.options); 
     
-    this.searchInput.addEventListener('keyup', function() {
+    let array = []; 
       
       options.forEach(function(element){
         if(element.innerText.includes(text)) {
           
-          return [
+          array.push( 
             {
               text: element.innerText,
               value: element.value
-            }
-          ];
+            })
         }
       })
-
-    });
+  return array; 
+   
 
 
 

@@ -5,9 +5,10 @@ btn.addEventListener('click', function () {
 });
 
 listElements.forEach(function(element) {
-	element.addEventListener('click', function() {
+	element.addEventListener('click', function(evt) {
 		btn.firstElementChild.textContent = element.firstElementChild.textContent;
 		btn.lastElementChild.classList.toggle('dropdown__list_active');
+		evt.preventDefault();
 		return false;
 	})
 })

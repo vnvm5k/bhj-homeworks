@@ -1,4 +1,4 @@
-const checkMain = Array.from(document.querySelectorAll('div>ul>li>label>input'));
+/*const checkMain = Array.from(document.querySelectorAll('div>ul>li>label>input'));
 console.log(checkMain); 
 const checkEl = Array.from(document.querySelectorAll('.interests_active'));
 console.log(checkEl); 
@@ -27,5 +27,21 @@ checkMain.forEach(function (element) {
 
 });
 
+*/
 
+const interests = Array.from(document.querySelectorAll('.interest'));
+for(let i = 0; i < interests.length; i++) {
+	const checks = Array.from(document.querySelectorAll('.interest__check'));
+	checks[i].addEventListener('change', function(ev) {
+		checks[i + 1].checked = true;
+		checks[i + 2].checked = true;
+	
+		if (checks[i].checked == false) {
+			checks[i + 1].checked = false;
+			checks[i + 2].checked = false;
+		}
+		ev.preventDefault();
+		
+	});
+}
 
