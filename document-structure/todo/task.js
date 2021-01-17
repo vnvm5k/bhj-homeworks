@@ -23,14 +23,12 @@ addButton.addEventListener('click', function(event){
 function displayMessages() {
   let displayMessage ='';
   if(localStorage.length === 0) todo.innerHTML = ''; 
-  for (let i = 0; i<=localStorage.length; i++) {
-    let task = localStorage.getItem(`todo${i}`);
+  for (let key in localStorage) {
+    let task = localStorage.getItem(`${key}`);
     if(typeof task === "string") {
       displayMessage += 
       	`<div class="task">
-          	<div class="task__title">
-          	${task}
-            </div>
+          	<div class="task__title">${task}</div>
             <a href="#" class="task__remove">&times;</a>
       	</div>
       	`;
@@ -42,8 +40,18 @@ function displayMessages() {
 todo.addEventListener('click', function(event){
 	event.preventDefault();
   let target = event.target;
-  let array = Array.from(document.getElementsByClassName('task'));
-  let i = (array.indexOf(target.closest('.task')));
-  localStorage.removeItem(`todo${i}`); 
+  let i = target.closest('.task').children[0].innerHTML;
+  console.log(i);
+  console.log(localStorage); 
+  for(let key in localStorage) {
+    if (!localStorage.hasOwnProperty(key)) {
+      continue; 
+    }
+    else if(localStorage[key] == i) {
+      let del = key;
+      localStorage.removeItem(`${del}`); 
+    }
+} 
+
 	displayMessages();
 });
